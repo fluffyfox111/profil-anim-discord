@@ -14,88 +14,87 @@ load_dotenv()
 DISCORD_BOT_TOKEN = os.getenv('TOKEN')
 
 if not DISCORD_BOT_TOKEN:
-    print(f"{Fore.RED}Erreur : la variable d'environnement TOKEN n'est pas définie.{Style.RESET_ALL}")
+    print(f"{Fore.RED}Error: TOKEN environment variable not set.{Style.RESET_ALL}")
     exit()
 
-URL_IMAGE_PROFIL = "https://imgur.com/gallery/just-few-fox-reactions-EdKDtOf"
-URL_IMAGE_BANNIÈRE = "https://imgur.com/gallery/fox-Z95f3RS"
+PROFILE_IMAGE_URL = "https://tenor.com/fr/view/senko-sewayaki-kitsune-no-senko-san-the-helpful-fox-senko-san-anime-anime-girl-gif-17464287"
+BANNER_IMAGE_URL = "https://imgur.com/gallery/fox-Z95f3RS"
 
-chargement = {}
+payload = {}
 
-FICHIER_DÉMARCHE = 'drapeau_mise_a_jour_profil.txt'
+FLAG_FILE = 'profile_update_flag.txt'
 
-if os.path.exists(FICHIER_DÉMARCHE):
-    print(f"{Fore.YELLOW}Le profil a déjà été mis à jour. Fin du programme.{Style.RESET_ALL}")
+if os.path.exists(FLAG_FILE):
+    print(f"{Fore.YELLOW}The profile has already been updated. Exiting.{Style.RESET_ALL}")
     exit()
 
-statut_mise_a_jour_bannière = "Non Mis à Jour"
-statut_mise_a_jour_avatar = "Non Mis à Jour"
+banner_update_status = "Not Updated"
+avatar_update_status = "Not Updated"
 
-if URL_IMAGE_PROFIL:
-    reponse_image_profil = requests.get(URL_IMAGE_PROFIL)
-    if reponse_image_profil.status_code == 200:
-        image_profil_base64 = base64.b64encode(reponse_image_profil.content).decode('utf-8')
-        chargement["avatar"] = f"data:image/gif;base64,{image_profil_base64}"
-        statut_mise_a_jour_avatar = "Succès"
+if PROFILE_IMAGE_URL:
+    profile_image_response = requests.get(PROFILE_IMAGE_URL)
+    if profile_image_response.status_code == 200:
+        profile_image_base64 = base64.b64encode(profile_image_response.content).decode('utf-8')
+        payload["avatar"] = f"data:image/gif;base64,{profile_image_base64}"
+        avatar_update_status = "Success"
     else:
-        print(f"{Fore.RED}Échec du téléchargement de la photo de profil.{Style.RESET_ALL}")
+        print(f"{Fore.RED}Failed to download profile picture.{Style.RESET_ALL}")
 
-if URL_IMAGE_BANNIÈRE:
-    reponse_image_banniere = requests.get(URL_IMAGE_BANNIÈRE)
-    if reponse_image_banniere.status_code == 200:
-        image_banniere_base64 = base64.b64encode(reponse_image_banniere.content).decode('utf-8')
-        chargement["banner"] = f"data:image/gif;base64,{image_banniere_base64}"
-        statut_mise_a_jour_bannière = "Succès"
+if BANNER_IMAGE_URL:
+    banner_image_response = requests.get(BANNER_IMAGE_URL)
+    if banner_image_response.status_code == 200:
+        banner_image_base64 = base64.b64encode(banner_image_response.content).decode('utf-8')
+        payload["banner"] = f"data:image/gif;base64,{banner_image_base64}"
+        banner_update_status = "Success"
     else:
-        print(f"{Fore.RED}Échec du téléchargement de la bannière.{Style.RESET_ALL}")
+        print(f"{Fore.RED}Failed to download banner.{Style.RESET_ALL}")
 
-if chargement:
-    en_tetes = {
+if payload:
+    headers = {
         'Authorization': f'Bot {DISCORD_BOT_TOKEN}',
         'Content-Type': 'application/json'
     }
 
     while True:
-        reponse = requests.patch('https://discord.com/api/v10/users/@me', headers=en_tetes, json=chargement)
+        response = requests.patch('https://discord.com/api/v10/users/@me', headers=headers, json=payload)
 
-        if reponse.status_code == 200:
+        if response.status_code == 200:
             break
-        elif reponse.status_code == 429:
-            retry_after = reponse.json().get('retry_after', 60)
-            print(f"{Fore.YELLOW}Limite de taux dépassée. Nouvelle tentative après {retry_after} secondes...{Style.RESET_ALL}")
+        elif response.status_code == 429:
+            retry_after = response.json().get('retry_after', 60)
+            print(f"{Fore.YELLOW}Rate limit exceeded. Retrying after {retry_after} seconds...{Style.RESET_ALL}")
             time.sleep(retry_after)
-        elif reponse.status_code == 401:
-            print(f"{Fore.RED}Jeton invalide. Veuillez vérifier votre jeton et réessayer.{Style.RESET_ALL}")
+        elif response.status_code == 401:
+            print(f"{Fore.RED}Invalid token. Please check your token and try again.{Style.RESET_ALL}")
             break
-        elif reponse.status_code == 50035:
-            print(f"{Fore.RED}Limite de taux pour l'avatar dépassée. Réessayez plus tard.{Style.RESET_ALL}")
+        elif response.status_code == 50035:
+            print(f"{Fore.RED}Avatar rate limit exceeded. Try again later.{Style.RESET_ALL}")
             break
         else:
-            print(f"{Fore.RED}Échec de la mise à jour du profil et/ou de la bannière : {reponse.text}{Style.RESET_ALL}")
+            print(f"{Fore.RED}Failed to update profile and/or banner: {response.text}{Style.RESET_ALL}")
             break
 else:
-    print(f"{Fore.YELLOW}Aucune mise à jour à effectuer. Les URL du profil et de la bannière étaient toutes deux vides.{Style.RESET_ALL}")
+    print(f"{Fore.YELLOW}No updates to make. Both profile and banner URLs were blank.{Style.RESET_ALL}")
 
-with open(FICHIER_DÉMARCHE, 'w') as f:
-    f.write('Le script de mise à jour du profil a été exécuté.')
+with open(FLAG_FILE, 'w') as f:
+    f.write('Profile update script has run.')
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Le script de mise à jour du profil a été exécuté."
+    return "Profile update script has run."
 
 if __name__ == "__main__":
-    # Supprimer les journaux de Flask
+    # Suppress Flask's logging
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.ERROR)
     
     port = int(os.environ.get("PORT", 10000))
 
-    print(f'\n{Fore.GREEN}🎨 Mise à jour de la bannière : {statut_mise_a_jour_bannière}{Style.RESET_ALL}')
-    print(f'{Fore.GREEN}🎨 Mise à jour de l\'avatar : {statut_mise_a_jour_avatar}{Style.RESET_ALL}')
-    print(f'{Fore.GREEN}🚀 Exécution sur le port : {port}{Style.RESET_ALL}')
-    print(f'{Fore.GREEN}⚙️ Custom is alwais better{Style.RESET_ALL}')
+    print(f'\n{Fore.GREEN}🎨 Banner Update: {banner_update_status}{Style.RESET_ALL}')
+    print(f'{Fore.GREEN}🎨 Avatar Update: {avatar_update_status}{Style.RESET_ALL}')
+    print(f'{Fore.GREEN}🚀 Running on Port: {port}{Style.RESET_ALL}')
+    print(f'{Fore.GREEN}⚙️ Powered by NY{Style.RESET_ALL}')
 
     app.run(host='0.0.0.0', port=port, debug=False)
-
