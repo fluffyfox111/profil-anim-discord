@@ -39,7 +39,3 @@ Bienvenue dans le projet de Bannière/Avatar Animé ! Suivez ces étapes pour pe
    - Assurez-vous que le lien de votre bannière/avatar est correctement ajouté. 🖼️
    - Vérifiez que vous avez activé les intents nécessaires. 🔄
    - Vérifiez que votre token de bot est correct. 🔍
-
-- **Toujours des Problèmes ?**  
-   - Pas de souci ! Rejoignez notre [Serveur de Support Discord](https://discord.gg/aEHqZFTYGw) et n'hésitez pas à demander de l'aide. 💬
-
