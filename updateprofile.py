@@ -17,8 +17,8 @@ if not DISCORD_BOT_TOKEN:
     print(f"{Fore.RED}Error: TOKEN environment variable not set.{Style.RESET_ALL}")
     exit()
 
-PROFILE_IMAGE_URL = "https://tenor.com/fr/view/senko-sewayaki-kitsune-no-senko-san-the-helpful-fox-senko-san-anime-anime-girl-gif-17464287"
-BANNER_IMAGE_URL = "https://imgur.com/gallery/fox-Z95f3RS"
+PROFILE_IMAGE_URL = "https://media.discordapp.net/attachments/1231645039810052116/1273207675500363837/senko.gif?ex=66bdc68c&is=66bc750c&hm=d01cd905d851efa8bc1c225d92013ef1a3b7fee59f92c26464317021dee3e041&="
+BANNER_IMAGE_URL = "https://media.discordapp.net/attachments/1231645039810052116/1273207686317604985/fox-mad.gif?ex=66bdc68f&is=66bc750f&hm=a4a694b056ddd3d9b314d754f6b51b25b7ef3a234b26078c185a2874ba40ae43&="
 
 payload = {}
 
