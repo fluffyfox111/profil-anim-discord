@@ -17,8 +17,8 @@ if not DISCORD_BOT_TOKEN:
     print(f"{Fore.RED}Erreur : la variable d'environnement TOKEN n'est pas définie.{Style.RESET_ALL}")
     exit()
 
-URL_IMAGE_PROFIL = "https://tenor.com/fr/view/uwu-anime-perricoat-zorrita-chica-zorro-gif-7245679579972775597"
-URL_IMAGE_BANNIÈRE = "https://tenor.com/fr/view/boop-fox-funny-animated-gif-24190579"
+URL_IMAGE_PROFIL = "https://imgur.com/gallery/just-few-fox-reactions-EdKDtOf"
+URL_IMAGE_BANNIÈRE = "https://imgur.com/gallery/fox-Z95f3RS"
 
 chargement = {}
 
