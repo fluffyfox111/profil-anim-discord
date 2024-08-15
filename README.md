@@ -13,6 +13,7 @@ Bienvenue dans le projet de Bannière/Avatar Animé ! Suivez ces étapes pour pe
 3. **Configurer sur Render**  
    - Allez sur [Render](https://render.com) et créez un nouveau service web. 
    - Ajoutez le lien de votre fork GitHub dans le champ du dépôt. 🔗
+   - modifier le code dans la ligne 
 
 4. **Configurer les Commandes de Build & de Démarrage**  
    - **Commande de Build :** `pip install -r requirements.txt` 
