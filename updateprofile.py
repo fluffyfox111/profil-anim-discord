@@ -14,40 +14,40 @@ load_dotenv()
 DISCORD_BOT_TOKEN = os.getenv('TOKEN')
 
 if not DISCORD_BOT_TOKEN:
-    print(f"{Fore.RED}Error: TOKEN environment variable not set.{Style.RESET_ALL}")
+    print(f"{Fore.RED}Error: TOKEN non défini.{Style.RESET_ALL}")
     exit()
-
-PROFILE_IMAGE_URL = "https://media.discordapp.net/attachments/1231645039810052116/1273207675500363837/senko.gif?ex=66bdc68c&is=66bc750c&hm=d01cd905d851efa8bc1c225d92013ef1a3b7fee59f92c26464317021dee3e041&="
-BANNER_IMAGE_URL = "https://media.discordapp.net/attachments/1231645039810052116/1273207686317604985/fox-mad.gif?ex=66bdc68f&is=66bc750f&hm=a4a694b056ddd3d9b314d754f6b51b25b7ef3a234b26078c185a2874ba40ae43&="
+#lien du gif discord ici
+PROFILE_IMAGE_URL = "lien"
+BANNER_IMAGE_URL = "lien"
 
 payload = {}
 
 FLAG_FILE = 'profile_update_flag.txt'
 
 if os.path.exists(FLAG_FILE):
-    print(f"{Fore.YELLOW}The profile has already been updated. Exiting.{Style.RESET_ALL}")
+    print(f"{Fore.YELLOW}Le profil a été mis à jour.{Style.RESET_ALL}")
     exit()
 
-banner_update_status = "Not Updated"
-avatar_update_status = "Not Updated"
+banner_update_status = "Non mis à jour"
+avatar_update_status = "Non mis à jour"
 
 if PROFILE_IMAGE_URL:
     profile_image_response = requests.get(PROFILE_IMAGE_URL)
     if profile_image_response.status_code == 200:
         profile_image_base64 = base64.b64encode(profile_image_response.content).decode('utf-8')
         payload["avatar"] = f"data:image/gif;base64,{profile_image_base64}"
-        avatar_update_status = "Success"
+        avatar_update_status = "Succès"
     else:
-        print(f"{Fore.RED}Failed to download profile picture.{Style.RESET_ALL}")
+        print(f"{Fore.RED}Échec du téléchargement de la photo de profil.{Style.RESET_ALL}")
 
 if BANNER_IMAGE_URL:
     banner_image_response = requests.get(BANNER_IMAGE_URL)
     if banner_image_response.status_code == 200:
         banner_image_base64 = base64.b64encode(banner_image_response.content).decode('utf-8')
         payload["banner"] = f"data:image/gif;base64,{banner_image_base64}"
-        banner_update_status = "Success"
+        banner_update_status = "Succès"
     else:
-        print(f"{Fore.RED}Failed to download banner.{Style.RESET_ALL}")
+        print(f"{Fore.RED}Échec du téléchargement de la bannière.{Style.RESET_ALL}")
 
 if payload:
     headers = {
@@ -62,28 +62,28 @@ if payload:
             break
         elif response.status_code == 429:
             retry_after = response.json().get('retry_after', 60)
-            print(f"{Fore.YELLOW}Rate limit exceeded. Retrying after {retry_after} seconds...{Style.RESET_ALL}")
+            print(f"{Fore.YELLOW}Limite de débit dépassée. Réessayer après {retry_after} secondes...{Style.RESET_ALL}")
             time.sleep(retry_after)
         elif response.status_code == 401:
-            print(f"{Fore.RED}Invalid token. Please check your token and try again.{Style.RESET_ALL}")
+            print(f"{Fore.RED}TOKEN invalide. Veuillez vérifier votre TOKEN et réessayer.{Style.RESET_ALL}")
             break
         elif response.status_code == 50035:
-            print(f"{Fore.RED}Avatar rate limit exceeded. Try again later.{Style.RESET_ALL}")
+            print(f"{Fore.RED}Limite de taux d'avatar dépassée. Réessayez plus tard.{Style.RESET_ALL}")
             break
         else:
-            print(f"{Fore.RED}Failed to update profile and/or banner: {response.text}{Style.RESET_ALL}")
+            print(f"{Fore.RED}Échec de la mise à jour du profil et/ou de la bannière :{response.text}{Style.RESET_ALL}")
             break
 else:
-    print(f"{Fore.YELLOW}No updates to make. Both profile and banner URLs were blank.{Style.RESET_ALL}")
+    print(f"{Fore.YELLOW}Aucune mise à jour à effectuer. Les URL du profil et de la bannière étaient vides.{Style.RESET_ALL}")
 
 with open(FLAG_FILE, 'w') as f:
-    f.write('Profile update script has run.')
+    f.write('Le script de mise à jour du profil a été exécuté.')
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return "Profile update script has run."
+    return "Le script de mise à jour du profil a été exécuté."
 
 if __name__ == "__main__":
     # Suppress Flask's logging
@@ -92,9 +92,10 @@ if __name__ == "__main__":
     
     port = int(os.environ.get("PORT", 10000))
 
-    print(f'\n{Fore.GREEN}🎨 Banner Update: {banner_update_status}{Style.RESET_ALL}')
-    print(f'{Fore.GREEN}🎨 Avatar Update: {avatar_update_status}{Style.RESET_ALL}')
-    print(f'{Fore.GREEN}🚀 Running on Port: {port}{Style.RESET_ALL}')
-    print(f'{Fore.GREEN}⚙️ Powered by NY{Style.RESET_ALL}')
+    print(f'\n{Fore.GREEN}Banniere: {banner_update_status}{Style.RESET_ALL}')
+    print(f'{Fore.GREEN}Avatar: {avatar_update_status}{Style.RESET_ALL}')
+    print(f'{Fore.GREEN}créé par NY{Style.RESET_ALL}')
+    print(f'{Fore.GREEN}rejoins mon serveur discord:https://discord.gg/aEHqZFTYGw{Style.RESET_ALL}')
+    print(f'{Fore.GREEN}https://discord.gg/aEHqZFTYGw{Style.RESET_ALL}')
 
     app.run(host='0.0.0.0', port=port, debug=False)
