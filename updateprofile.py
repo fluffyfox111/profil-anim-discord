@@ -17,8 +17,8 @@ if not DISCORD_BOT_TOKEN:
     print(f"{Fore.RED}Error: TOKEN non défini.{Style.RESET_ALL}")
     exit()
 #lien du gif discord ici
-PROFILE_IMAGE_URL = "lien"
-BANNER_IMAGE_URL = "lien"
+PROFILE_IMAGE_URL = "https://cdn.discordapp.com/attachments/1273650008692101181/1273663264537968683/senko.gif?ex=66bf6ed9&is=66be1d59&hm=9efe7609a031eef00343b292b9896e111bb4b208829349da1cc02f2c0cc1ce3f&"
+BANNER_IMAGE_URL = "https://cdn.discordapp.com/attachments/1273650008692101181/1273663289943130172/fox-mad.gif?ex=66bf6edf&is=66be1d5f&hm=0085d34ae44aebb98eb173514bd1adf9265a6c93735aa51976e2dd3afe458304&"
 
 payload = {}
 
