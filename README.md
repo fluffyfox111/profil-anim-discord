@@ -7,31 +7,32 @@ Bienvenue dans ce projet ! Suivez ces étapes pour personnaliser l'apparence de 
 1. **cloner le Projet**  
    Commencez par cloner le projet dans votre propre dépôt GitHub. 🍴
 
-2. **Ajouter Votre Bannière/Avatar et configurer le fichier **  
-   Téléchargez votre bannière et/ou avatar personnalisé dans dans discord et copier le lien. 🖼️
+2. **Ajouter Votre Bannière/Avatar et configurer le fichier updateprofile.py **  
+   Téléchargez votre bannière et/ou avatar personnalisé dans dans discord et copier le lien.
+   dans updateprofile.py ajouter true ou false si vous voulez changer uniquement la baniere/le profil/le status/à propos 🖼️
+   modifier le code et ajouter un lien d'un gif provenant de discord 
 
-3. **Configurer sur Render**  
+4. **Configurer sur Render**  
    - Allez sur [Render](https://render.com) et créez un nouveau service web. 
    - Ajoutez le lien de votre fork GitHub dans le champ du dépôt. 🔗
-   - modifier le code dans la ligne 20 et 21 du code et ajouter un lien d'un gif provenant de discord 
 
-4. **Configurer les Commandes de Build & de Démarrage**  
+5. **Configurer les Commandes de Build & de Démarrage**  
    - **Commande de Build :** `pip install -r requirements.txt` 
    - **Commande de Démarrage :** `python updateprofile.py` 
 
-5. **Variables d'Environnement**  
+6. **Variables d'Environnement**  
    - Allez dans les paramètres "Environment". 🌿
    - Ajoutez une nouvelle variable :  
      - **Name :** `TOKEN`  
      - **Value :** Votre token de bot ici 🔑
 
-6. **Déployer Votre Service Web**  
+7. **Déployer Votre Service Web**  
    Déployez le service web et attendez qu'il soit en ligne. 🏗️
 
-7. **Vérifier les Changements**  
+8. **Vérifier les Changements**  
    Une fois le serveur en ligne, vérifiez le profil de votre bot pour voir si la bannière et/ou l'avatar ont été mis à jour. 🎯
 
-8. **Nettoyage**  
+9. **Nettoyage**  
    Si tout semble correct, vous pouvez supprimer le service web sur Render. 🗑️
 
 ## ❓ Dépannage
