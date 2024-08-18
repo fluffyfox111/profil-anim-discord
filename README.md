@@ -1,14 +1,14 @@
-# 🎨 Bannière/Avatar Animé
+# 🎨 Bannière/Avatar Animé,retire les status et à propos indesirables 
 
-Bienvenue dans le projet de Bannière/Avatar Animé ! Suivez ces étapes pour personnaliser l'apparence de votre bot avec une bannière et/ou un avatar animé. 🎉
+Bienvenue dans ce projet ! Suivez ces étapes pour personnaliser l'apparence de votre bot avec une bannière et/ou un avatar animé (et retirer les status indesirables des hebergeurs de bots gratuit tel que ghostbot ou shapes) . 🎉
 
 ## 🚀 Démarrage Rapide
 
-1. **Forker le Projet**  
-   Commencez par forker le projet dans votre propre dépôt GitHub. 🍴
+1. **cloner le Projet**  
+   Commencez par cloner le projet dans votre propre dépôt GitHub. 🍴
 
-2. **Ajouter Votre Bannière/Avatar**  
-   Téléchargez votre bannière et/ou avatar personnalisé dans le projet. 🖼️
+2. **Ajouter Votre Bannière/Avatar et configurer le fichier **  
+   Téléchargez votre bannière et/ou avatar personnalisé dans dans discord et copier le lien. 🖼️
 
 3. **Configurer sur Render**  
    - Allez sur [Render](https://render.com) et créez un nouveau service web. 
