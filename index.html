@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Update</title>
+</head>
+<body>
+    <h1>Update Profile</h1>
+    <form method="post">
+        <label for="profile_image_url">Profile Image URL:</label>
+        <input type="text" id="profile_image_url" name="profile_image_url" value="{{ profile_image_url }}" required><br><br>
+
+        <label for="banner_image_url">Banner Image URL:</label>
+        <input type="text" id="banner_image_url" name="banner_image_url" value="{{ banner_image_url }}" required><br><br>
+
+        <label for="about_me_text">About Me Text:</label>
+        <input type="text" id="about_me_text" name="about_me_text" value="{{ about_me_text }}" required><br><br>
+
+        <label for="status_text">Status Text:</label>
+        <input type="text" id="status_text" name="status_text" value="{{ status_text }}" required><br><br>
+
+        <input type="submit" value="Update">
+    </form>
+</body>
+</html>
